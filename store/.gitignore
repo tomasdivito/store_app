@@ -3,7 +3,7 @@
 
 
 #the data context will not be in the git for now
-ProductContext.cs
+ProductsContext.cs
 
 # User-specific files
 *.suo
