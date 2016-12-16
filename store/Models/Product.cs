@@ -1,4 +1,3 @@
-using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace store.Models
@@ -25,6 +24,8 @@ namespace store.Models
 
     public class ProductImage
     {
+        [Required]
+        public int ID { get; set; }
         // The unique name is importart to have different names and avoid having 
         // two images with the same name like trying to get a house.jpg images
         // and having two with the same name

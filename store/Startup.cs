@@ -1,12 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+
+using store.Models;
 
 namespace store
 {
@@ -20,6 +18,21 @@ namespace store
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
+
+            using(var context = new ProductsContext())
+            {
+                context.Database.EnsureCreated();
+
+                var product = new Product { ID = 1,
+                 Name = "Mesa", Price = 29, Stock = true};
+                context.Add(product);
+
+                var image = new ProductImage { ID = 1,
+                 UniqueName = "Mesa1", ProductID = 1, };
+                 context.Add(image);
+
+                context.SaveChanges();
+            }
         }
 
         public IConfigurationRoot Configuration { get; }
